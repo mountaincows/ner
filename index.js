@@ -18,6 +18,10 @@ var connection = mysql.createConnection({ //create connection
 	database: 'greasesh_couk'
 });
 
+app.get('/' function(req,res){
+	res.send("hi");
+})
+
 app.use(cors());
 var port = process.env.PORT || 8080;
 //Endpoints
