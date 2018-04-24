@@ -30,11 +30,11 @@ worldPay.do(app, connection, request, postcode);
 
 
 app.get('/test/:id', function(req,res){
-
-	var query = "SELECT * FROM epas_products"
+	res.send(req.params.id);
+	var query = "SELECT * FROM epas_products";
 	connection.query(query, function(error, response){
-		res.send(req.params.id + " - " + JSON.stringify(response) + " len: " + response.length);
-		console.log("response: " + JSON.stringify(response));
+//		res.send(req.params.id + " - " + JSON.stringify(response) + " len: " + response.length);
+//		console.log("response: " + JSON.stringify(response));
 	})
 })
 
