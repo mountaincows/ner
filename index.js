@@ -19,10 +19,13 @@ var connection = mysql.createConnection({ //create connection
 });
 
 app.use(cors());
-
+var port = process.env.PORT || 8080;
 //Endpoints
 worldPay.do(app, connection, request, postcode);
 test.do(app, connection);
-app.listen(8080);
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
 
 console.log("Server started...")
