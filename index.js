@@ -18,7 +18,7 @@ var connection = mysql.createConnection({ //create connection
 	database: 'greasesh_couk'
 });
 
-app.get('/' function(req,res){
+app.get('/', function(req,res){
 	res.send("hi");
 })
 
