@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var postcode = require('postcode');
 // Endpoints
 var worldPay = require('./worldPay');
-var test = require('./test');
+//var test = require('./test');
 var app = express();
 app.use(bodyParser.json());
 
@@ -26,7 +26,17 @@ app.use(cors());
 var port = process.env.PORT || 8080;
 //Endpoints
 worldPay.do(app, connection, request, postcode);
-test.do(app, connection);
+//test.do(app, connection);
+
+
+app.get('/test/:id', function(req,res){
+
+	var query = "SELECT * FROM epas_products"
+	connection.query(query, function(error, response){
+		res.send(req.params.id + " - " + JSON.stringify(response) + " len: " + response.length);
+		console.log("response: " + JSON.stringify(response));
+	})
+})
 
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
