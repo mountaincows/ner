@@ -5,8 +5,8 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var postcode = require('postcode');
 // Endpoints
-var worldPay = require('./worldPay');
-//var test = require('./test');
+var newPay = require('./new');
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -18,10 +18,6 @@ var connection = mysql.createConnection({ //create connection
 	database: 'greasesh_couk'
 });
 
-app.get('/', function(req,res){
-	res.send("hi");
-})
-
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
     res.header("Access-Control-Allow-Credentials", true);
@@ -29,20 +25,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     next();
 });
+
 var port = process.env.PORT || 8080;
-//Endpoints
-worldPay.do(app, connection, request, postcode);
-//test.do(app, connection);
 
-
-app.get('/test/:id', function(req,res){
-	res.send(req.params.id);
-	var query = "SELECT * FROM epas_products";
-	connection.query(query, function(error, response){
-//		res.send(req.params.id + " - " + JSON.stringify(response) + " len: " + response.length);
-//		console.log("response: " + JSON.stringify(response));
-	})
-})
+newPay(app, connection, request, postcode);
 
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
